@@ -1,0 +1,490 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Association - AMAP des Jalles</title>
+    <meta name="description"
+        content="L'association AMAP des Jalles : reglement interieur, statuts, charte, comptes-rendus d'AG, college et liens amis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <style>
+        .asso-toc { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+        .asso-toc a { padding: 8px 14px; background: #f3f4f6; border-radius: 20px; text-decoration: none; color: #374151; font-size: 0.9em; }
+        .asso-toc a:hover { background: var(--color-secondary, var(--green-dark)); color: white; }
+        .doc-list { list-style: none; padding: 0; }
+        .doc-list li { padding: 10px 0; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .doc-list li:last-child { border-bottom: none; }
+        .doc-meta { color: #6b7280; font-size: 0.85em; }
+        .trombi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .trombi-card { text-align: center; padding: 20px; background: #f9fafb; border-radius: 8px; }
+        .trombi-photo { width: 100px; height: 100px; border-radius: 50%; background: #e5e7eb; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 2em; color: #9ca3af; }
+        .placeholder-note { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 4px; font-size: 0.9em; color: #78350f; }
+
+        /* Frise annuelle horizontale (galerie) */
+        .timeline-wrap { overflow-x: auto; padding: 30px 10px 20px; }
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(180px, 1fr));
+            gap: 0;
+            position: relative;
+            min-width: 1100px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--green), #f59e0b, #dc2626, #6b21a8, var(--green));
+            border-radius: 2px;
+        }
+        .timeline-month { position: relative; text-align: center; padding: 0 8px; }
+        .timeline-month::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: calc(50% - 8px);
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--color-primary, var(--green-dark));
+        }
+        .timeline-month.has-event::after { background: var(--color-accent, #f59e0b); border-color: #fff; box-shadow: 0 0 0 3px var(--color-accent, #f59e0b); }
+        .timeline-label { font-weight: 700; font-size: 0.85em; color: #374151; margin-bottom: 60px; }
+        .timeline-event { margin-top: 60px; font-size: 0.8em; color: #4b5563; }
+        .timeline-event strong { display: block; color: #111827; margin-bottom: 2px; }
+
+        /* Galerie */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: #9ca3af;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .gallery-item:hover { transform: scale(1.02); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.65);
+            color: white;
+            padding: 6px 10px;
+            font-size: 0.8em;
+        }
+        .event-block { margin-bottom: 40px; }
+        .event-block h3 { display: flex; align-items: center; gap: 10px; }
+        .event-block h3 .event-date { color: #6b7280; font-size: 0.7em; font-weight: 400; }
+
+        /* Lightbox <dialog> */
+        dialog.lightbox { border: none; padding: 0; background: transparent; max-width: 95vw; max-height: 95vh; }
+        dialog.lightbox::backdrop { background: rgba(0, 0, 0, 0.85); }
+        dialog.lightbox img { max-width: 90vw; max-height: 85vh; display: block; border-radius: 8px; }
+        dialog.lightbox .close { position: absolute; top: 10px; right: 10px; background: white; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.4em; cursor: pointer; }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="AMAP des Jalles" class="logo-img">
+                <div class="logo-text">
+                    <h1>AMAP des Jalles</h1>
+                    <p>Saint-Medard-en-Jalles</p>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="producteurs.html">Producteurs</a></li>
+                    <li><a href="asso.html" class="active">Association</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-accent amapj-btn"
+                            target="_blank" title="Acceder a AMAPJ">
+                            <img src="https://s2.amapj.fr/p/VAADIN/themes/amapj/favicon.ico" alt="AMAPJ"
+                                style="width: 20px; height: 20px; vertical-align: middle;">
+                        </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" style="padding: 50px 20px;">
+        <div class="hero-content">
+            <h1>L'association</h1>
+            <p>AMAP des Jalles &mdash; Association loi 1901, gouvernance collegiale, distribution chaque jeudi au Pole
+                Municipal Simone Veil.</p>
+        </div>
+    </section>
+
+    <!-- Sommaire -->
+    <section class="section">
+        <div class="container">
+            <nav class="asso-toc" aria-label="Sommaire">
+                <a href="#reglement">Reglement</a>
+                <a href="#statuts">Statuts</a>
+                <a href="#charte">Charte</a>
+                <a href="#ag">AG</a>
+                <a href="#trombi">College</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#liens-amis">Liens amis</a>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Reglement -->
+    <section class="section section-light" id="reglement">
+        <div class="container">
+            <div class="section-title">
+                <h2>Reglement interieur</h2>
+                <p>Regles de fonctionnement de l'AMAP, droits et devoirs des adherents.</p>
+            </div>
+            <div class="card">
+                <ul class="doc-list">
+                    <li>
+                        <span>&#128221; Reglement interieur &mdash; version a jour</span>
+                        <span><a href="documents/reglement-interieur.pdf" class="btn btn-secondary">Telecharger PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                    <li>
+                        <span>&#128247; Clause droit a l'image</span>
+                        <span><a href="documents/droit-image.pdf" class="btn btn-secondary">Telecharger PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                </ul>
+                <p class="placeholder-note mt-20">
+                    <strong>A valider en CC :</strong> la clause droit a l'image sera-t-elle integree au reglement ou
+                    fournie comme document separe a signer lors de l'adhesion ?
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statuts -->
+    <section class="section" id="statuts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Statuts</h2>
+                <p>Statuts de l'association loi 1901.</p>
+            </div>
+            <div class="card">
+                <ul class="doc-list">
+                    <li>
+                        <span>&#128209; Statuts de l'AMAP des Jalles</span>
+                        <span><a href="documents/statuts.pdf" class="btn btn-secondary">Telecharger PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charte -->
+    <section class="section section-light" id="charte">
+        <div class="container">
+            <div class="section-title">
+                <h2>Charte des AMAP</h2>
+                <p>Les principes fondateurs du mouvement AMAP, partages par notre association.</p>
+            </div>
+            <div class="card">
+                <ul class="doc-list">
+                    <li>
+                        <span>&#128214; Charte des AMAP (MIRAMAP)</span>
+                        <span>
+                            <a href="https://miramap.org/IMG/pdf/charte_des_amap_mars_2014.pdf" target="_blank"
+                                rel="noopener" class="btn btn-secondary">Charte officielle &#8599;</a>
+                        </span>
+                    </li>
+                    <li>
+                        <span>&#127807; Charte locale AMAP des Jalles</span>
+                        <span><a href="documents/charte-locale.pdf" class="btn btn-secondary">Telecharger PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- AG -->
+    <section class="section" id="ag">
+        <div class="container">
+            <div class="section-title">
+                <h2>Assemblees Generales</h2>
+                <p>Comptes-rendus des AG annuelles et reunions de college.</p>
+            </div>
+            <div class="card">
+                <ul class="doc-list">
+                    <li>
+                        <span>&#128197; AG 2025</span>
+                        <span><a href="documents/ag-2025.pdf" class="btn btn-secondary">Compte-rendu PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                    <li>
+                        <span>&#128197; AG 2024</span>
+                        <span><a href="documents/ag-2024.pdf" class="btn btn-secondary">Compte-rendu PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                    <li>
+                        <span>&#128197; AG 2023</span>
+                        <span><a href="documents/ag-2023.pdf" class="btn btn-secondary">Compte-rendu PDF</a>
+                            <span class="doc-meta">(a deposer)</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trombi -->
+    <section class="section section-light" id="trombi">
+        <div class="container">
+            <div class="section-title">
+                <h2>Le College</h2>
+                <p>Les benevoles qui font vivre l'AMAP au quotidien.</p>
+            </div>
+            <div class="trombi-grid">
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Referent legumes</h4>
+                    <p class="doc-meta">(nom a renseigner)</p>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Tresorier</h4>
+                    <p class="doc-meta">(nom a renseigner)</p>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Secretaire</h4>
+                    <p class="doc-meta">(nom a renseigner)</p>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Referent communication</h4>
+                    <p class="doc-meta">(nom a renseigner)</p>
+                </div>
+            </div>
+            <p class="placeholder-note mt-20">
+                Les photos et noms des membres du college seront completes apres validation et accord ecrit des
+                interesses (droit a l'image).
+            </p>
+        </div>
+    </section>
+
+    <!-- Galerie : frise annuelle -->
+    <section class="section" id="galerie">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galerie</h2>
+                <p>Retour en images sur les temps forts de l'AMAP : AG, visites de fermes, fetes, ateliers.</p>
+            </div>
+            <h3 style="text-align: center; margin-bottom: 10px;">Frise annuelle</h3>
+            <p style="text-align: center; color: #6b7280; margin-bottom: 10px;">Les temps forts d'une annee a l'AMAP des Jalles.</p>
+            <div class="timeline-wrap">
+                <div class="timeline" id="timeline"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie : evenements -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Evenements 2025-2026</h2>
+                <p>Les moments marquants de l'annee. Cliquez sur une vignette pour l'agrandir.</p>
+            </div>
+            <div id="eventsContainer"></div>
+        </div>
+    </section>
+
+    <!-- Lightbox galerie -->
+    <dialog class="lightbox" id="lightbox">
+        <button class="close" aria-label="Fermer" onclick="document.getElementById('lightbox').close()">&times;</button>
+        <img id="lightboxImg" alt="">
+    </dialog>
+
+    <!-- Liens Amis -->
+    <section class="section" id="liens-amis">
+        <div class="container">
+            <div class="section-title">
+                <h2>Liens amis</h2>
+                <p>Reseau AMAP et partenaires locaux.</p>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>&#127757; MIRAMAP</h3>
+                    <p>Mouvement Inter-Regional des AMAP. Coordination nationale du reseau.</p>
+                    <a href="https://miramap.org/" target="_blank" rel="noopener" class="btn btn-secondary">Visiter &#8599;</a>
+                </div>
+                <div class="card">
+                    <h3>&#127817; AMAP Aquitaine</h3>
+                    <p>Reseau regional des AMAP de Nouvelle-Aquitaine.</p>
+                    <a href="https://amap-aquitaine.org/" target="_blank" rel="noopener" class="btn btn-secondary">Visiter &#8599;</a>
+                </div>
+                <div class="card">
+                    <h3>&#127995; Annuaire Agence Bio</h3>
+                    <p>Registre officiel des operateurs certifies bio en France.</p>
+                    <a href="https://annuaire.agencebio.org/" target="_blank" rel="noopener" class="btn btn-secondary">Visiter &#8599;</a>
+                </div>
+                <div class="card">
+                    <h3>&#128205; AMAPs voisines</h3>
+                    <p>Liste des AMAPs voisines (Eysines, Le Taillan, Merignac, Saint-Aubin&hellip;) a deposer.</p>
+                    <p class="doc-meta">(a completer)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AMAP des Jalles</h4>
+                <p>Association pour le Maintien d'une Agriculture Paysanne</p>
+                <p>Pole Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Medard-en-Jalles</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="producteurs.html">Nos producteurs</a></li>
+                    <li><a href="asso.html">Association</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Espace adherent</h4>
+                <ul>
+                    <li><a href="https://s2.amapj.fr/p/saint-medard-en-jalles" target="_blank">&#128279; Plateforme
+                            AMAPJ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>2024-2026 AMAP des Jalles</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('open');
+        }
+
+        // === Galerie : frise annuelle et evenements ===
+        // À enrichir au fil des années — déposer les photos dans images/galerie/<annee>/<event>/.
+        const months = ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const yearlyEvents = {
+            1: { title: 'AG annuelle', emoji: '&#128483;' },
+            3: { title: 'Visite ferme legumes', emoji: '&#129388;' },
+            5: { title: 'Fete de printemps', emoji: '&#127801;' },
+            7: { title: 'Barbecue d\'ete', emoji: '&#127869;' },
+            10: { title: 'Marche d\'automne', emoji: '&#127825;' },
+            12: { title: 'Marche de Noel', emoji: '&#127876;' }
+        };
+
+        const events = [
+            {
+                title: 'AG annuelle',
+                date: 'Janvier 2026',
+                emoji: '&#128483;',
+                photos: [
+                    { src: 'images/galerie/2026/ag/photo1.jpg', caption: 'Ouverture' },
+                    { src: 'images/galerie/2026/ag/photo2.jpg', caption: 'Bilan' },
+                    { src: 'images/galerie/2026/ag/photo3.jpg', caption: 'Vote' }
+                ]
+            },
+            {
+                title: 'Visite ferme Le Jardin de Quentin',
+                date: 'Mars 2026',
+                emoji: '&#129388;',
+                photos: [
+                    { src: 'images/galerie/2026/visite-quentin/photo1.jpg', caption: 'Serre' },
+                    { src: 'images/galerie/2026/visite-quentin/photo2.jpg', caption: 'Champs' }
+                ]
+            },
+            {
+                title: 'Marche de Noel 2025',
+                date: 'Decembre 2025',
+                emoji: '&#127876;',
+                photos: [
+                    { src: 'images/galerie/2025/noel/photo1.jpg', caption: 'Stand' },
+                    { src: 'images/galerie/2025/noel/photo2.jpg', caption: 'Vin chaud' }
+                ]
+            }
+        ];
+
+        function renderTimeline() {
+            const el = document.getElementById('timeline');
+            el.innerHTML = months.map((label, i) => {
+                const monthNum = i + 1;
+                const evt = yearlyEvents[monthNum];
+                return `
+                    <div class="timeline-month${evt ? ' has-event' : ''}">
+                        <div class="timeline-label">${label}</div>
+                        ${evt ? `<div class="timeline-event"><strong>${evt.emoji} ${evt.title}</strong></div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderEvents() {
+            const container = document.getElementById('eventsContainer');
+            container.innerHTML = events.map(ev => `
+                <div class="event-block">
+                    <h3>${ev.emoji} ${ev.title} <span class="event-date">&middot; ${ev.date}</span></h3>
+                    <div class="gallery-grid">
+                        ${ev.photos.map(p => {
+                            // Affiche un placeholder tant que la photo n'est pas deposee.
+                            // Quand p.uploaded === true, on tente de charger l'image reelle.
+                            if (p.uploaded) {
+                                return `<div class="gallery-item" onclick="openLightbox('${p.src}', '${ev.title} &mdash; ${p.caption}')">
+                                    <img src="${p.src}" alt="${p.caption}">
+                                    <div class="gallery-caption">${p.caption}</div>
+                                </div>`;
+                            }
+                            return `<div class="gallery-item" title="${p.caption} (photo a deposer)">
+                                <span>${ev.emoji}</span>
+                                <div class="gallery-caption">${p.caption} <em style="opacity:0.7;">(a venir)</em></div>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openLightbox(src, caption) {
+            const img = document.getElementById('lightboxImg');
+            img.src = src;
+            img.alt = caption;
+            document.getElementById('lightbox').showModal();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            renderTimeline();
+            renderEvents();
+        });
+    </script>
+</body>
+
+</html>

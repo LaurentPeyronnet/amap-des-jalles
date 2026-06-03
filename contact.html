@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - AMAP des Jalles</title>
+    <meta name="description"
+        content="Contactez l'AMAP des Jalles pour en savoir plus sur notre association ou pour rejoindre notre communaute d'adherents.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="AMAP des Jalles" class="logo-img">
+                <div class="logo-text">
+                    <h1>AMAP des Jalles</h1>
+                    <p>Saint-Medard-en-Jalles</p>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="producteurs.html">Producteurs</a></li>
+                    <li><a href="asso.html">Association</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-accent amapj-btn"
+                            target="_blank" title="Acceder a AMAPJ">
+                            <img src="https://s2.amapj.fr/p/VAADIN/themes/amapj/favicon.ico" alt="AMAPJ"
+                                style="width: 20px; height: 20px; vertical-align: middle;">
+                        </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" style="padding: 50px 20px;">
+        <div class="hero-content">
+            <h1>Nous Contacter</h1>
+            <p>Une question ? Envie de nous rejoindre ? N'hesitez pas a nous contacter !</p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section">
+        <div class="container">
+            <div class="info-grid">
+                <!-- Lieu de distribution -->
+                <div class="info-card">
+                    <h3>&#128205; Lieu de distribution</h3>
+                    <ul>
+                        <li>&#127963; Pole Municipal Simone Veil</li>
+                        <li>&#128739; 26 Rue Aurel Chazeau</li>
+                        <li>&#128238; 33160 Saint-Medard-en-Jalles</li>
+                    </ul>
+                    <p style="margin-top: 20px; color: #6b7280; font-size: 0.9em;">
+                        Parking a proximite immediate du pole municipal.
+                    </p>
+                </div>
+
+                <!-- Horaires -->
+                <div class="info-card">
+                    <h3>&#9200; Horaires de distribution</h3>
+                    <ul>
+                        <li>&#128198; Tous les jeudis soir</li>
+                        <li>&#128337; De 19h a 19h45</li>
+                        <li>&#128467; Toute l'annee sauf jours feries</li>
+                    </ul>
+                    <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-accent mt-20" target="_blank" rel="noopener">Voir le planning sur AMAPJ</a>
+                </div>
+
+                <!-- Contact AMAPJ -->
+                <div class="info-card">
+                    <h3>&#128279; Plateforme AMAPJ</h3>
+                    <ul>
+                        <li>&#128187; Gestion des contrats en ligne</li>
+                        <li>&#128197; Planning des distributions</li>
+                        <li>&#128231; Communication avec les producteurs</li>
+                    </ul>
+                    <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-accent mt-20"
+                        target="_blank">Acceder a AMAPJ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carte -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ou nous trouver</h2>
+                <p>Pole Municipal Simone Veil, 26 Rue Aurel Chazeau, Saint-Medard-en-Jalles</p>
+            </div>
+            <div id="map" class="map-container"></div>
+        </div>
+    </section>
+
+    <!-- Nous rejoindre -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rejoindre l'AMAP</h2>
+                <p>Envie de manger local et de soutenir nos producteurs ?</p>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">1</div>
+                    <h3>Venez a une distribution</h3>
+                    <p>Passez lors d'une distribution pour decouvrir l'ambiance, rencontrer les adherents et les
+                        producteurs. Vous pourrez poser toutes vos questions !</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">2</div>
+                    <h3>Remplissez l'adhesion</h3>
+                    <p>L'adhesion annuelle est de 8 EUR par foyer. Elle permet de soutenir l'association et donne acces
+                        aux contrats avec les producteurs.</p>
+                    <a href="https://framaforms.org/" class="btn btn-accent mt-20" target="_blank" rel="noopener" data-adhesion-form>
+                        &#128221; Remplir le formulaire d'adhesion &#8599;
+                    </a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">3</div>
+                    <h3>Choisissez vos contrats</h3>
+                    <p>Selectionnez les producteurs et produits qui vous interessent parmi nos 16 producteurs
+                        partenaires. Les contrats sont generalement annuels ou saisonniers.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">4</div>
+                    <h3>Bienvenue dans l'AMAP !</h3>
+                    <p>Vous ferez partie d'une communaute chaleureuse qui partage les memes valeurs. Participez aux
+                        evenements, ateliers et fetes !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Que se passe-t-il si... -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Que se passe-t-il si&hellip;</h2>
+                <p>Les scenarios courants de la vie d'adherent et la marche a suivre via AMAPJ.</p>
+            </div>
+            <div class="card-grid" style="grid-template-columns: 1fr;">
+                <div class="card">
+                    <h3>&hellip; je ne peux pas venir recuperer mon panier ?</h3>
+                    <p>Donnez procuration a un autre adherent ou a un proche : il recuperera votre panier a votre place.
+                        Pour une absence prolongee (vacances, deplacement), prevenez sur AMAPJ via la messagerie ou
+                        suspendez votre contrat le temps de l'absence.</p>
+                    <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" target="_blank" rel="noopener">Gerer mes absences sur AMAPJ &#8599;</a>
+                </div>
+                <div class="card">
+                    <h3>&hellip; je veux echanger un panier ou un produit ?</h3>
+                    <p>Les echanges entre adherents sont possibles et encourages a la distribution.
+                        Pour un echange recurrent, signalez-le via AMAPJ pour que le producteur soit informe.</p>
+                </div>
+                <div class="card">
+                    <h3>&hellip; je veux modifier ou suspendre un contrat ?</h3>
+                    <p>Les modifications de contrat se font en debut de cycle (semestriel ou annuel selon le producteur)
+                        depuis votre espace AMAPJ. En cours de saison, contactez le referent du contrat via AMAPJ.</p>
+                    <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" target="_blank" rel="noopener">Mes contrats sur AMAPJ &#8599;</a>
+                </div>
+                <div class="card">
+                    <h3>&hellip; je veux resilier mon adhesion ?</h3>
+                    <p>L'adhesion est annuelle et ne se renouvelle pas automatiquement. Vous pouvez quitter l'AMAP a la
+                        fin du cycle en cours. Pour une situation particuliere, contactez le college via AMAPJ.</p>
+                </div>
+                <div class="card">
+                    <h3>&hellip; je veux venir voir avant de m'inscrire ?</h3>
+                    <p>Bien sur ! Passez a une distribution un jeudi soir au Pole Municipal Simone Veil pour decouvrir
+                        l'ambiance, rencontrer les adherents et les producteurs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA AMAPJ -->
+    <section class="section">
+        <div class="container text-center">
+            <h2>Pret a nous rejoindre ?</h2>
+            <p style="max-width: 600px; margin: 20px auto;">Creez votre compte sur AMAPJ pour acceder aux contrats et
+                commencer a recevoir des produits frais et locaux !</p>
+            <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-accent" target="_blank"
+                style="font-size: 1.1em; padding: 15px 30px;">
+                &#128279; S'inscrire sur AMAPJ
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AMAP des Jalles</h4>
+                <p>Association pour le Maintien d'une Agriculture Paysanne</p>
+                <p>Pole Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Medard-en-Jalles</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="producteurs.html">Nos producteurs</a></li>
+                    <li><a href="asso.html">Association</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Espace adherent</h4>
+                <ul>
+                    <li><a href="https://s2.amapj.fr/p/saint-medard-en-jalles" target="_blank">&#128279; Plateforme
+                            AMAPJ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>2024-2026 AMAP des Jalles - Donnees extraites de AMAPJ</p>
+        </div>
+    </footer>
+
+    <script src="js/producers-data.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('open');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const { lat, lng } = amapInfo.coords;
+            const map = L.map('map').setView([lat, lng], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&#169; OpenStreetMap contributors'
+            }).addTo(map);
+            L.marker([lat, lng], { icon: amapLogoIcon(), title: amapInfo.name, zIndexOffset: 1000 }).addTo(map)
+                .bindPopup(`<strong>${amapInfo.name}</strong><br>${amapInfo.venue}<br>${amapInfo.address}<br>${amapInfo.postalCode} ${amapInfo.city}<br><br><em>${amapInfo.day} de ${amapInfo.startTime} a ${amapInfo.endTime}</em>`)
+                .openPopup();
+        });
+    </script>
+</body>
+
+</html>

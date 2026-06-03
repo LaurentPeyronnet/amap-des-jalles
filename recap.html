@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue d'ensemble producteurs - AMAP des Jalles</title>
+    <meta name="description" content="Recapitulatif des producteurs, produits et prix de l'AMAP des Jalles - version imprimable.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <style>
+        .recap-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .recap-table th, .recap-table td { padding: 8px 10px; border: 1px solid #e5e7eb; text-align: left; vertical-align: top; }
+        .recap-table thead { background: #f3f4f6; }
+        .recap-table tbody tr:nth-child(odd) { background: #fafafa; }
+        .recap-producer { font-weight: 700; }
+        .recap-product { padding-left: 18px; color: #4b5563; }
+        .recap-prive-banner { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px; margin-bottom: 20px; border-radius: 4px; }
+        .recap-qr { display: flex; align-items: center; gap: 20px; margin-top: 30px; padding: 20px; border: 1px dashed #d1d5db; border-radius: 8px; background: #f9fafb; }
+        .recap-qr img { width: 140px; height: 140px; }
+        .recap-meta { color: #6b7280; font-size: 0.85em; }
+        /* .badge-bio surchargé par style.css (variante Yuka) */
+        @media print {
+            header, footer, .no-print { display: none !important; }
+            .hero { padding: 0 !important; }
+            .hero h1 { font-size: 1.4em; margin: 0; color: #000; }
+            .hero p { display: none; }
+            body { background: white; }
+            .section { padding: 10px 0 !important; }
+            .container { max-width: 100% !important; padding: 0 12mm !important; }
+            .recap-table { font-size: 0.78em; page-break-inside: auto; }
+            .recap-table tr { page-break-inside: avoid; }
+            .recap-qr { page-break-before: avoid; }
+            a { color: #000; text-decoration: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="no-print">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="AMAP des Jalles" class="logo-img">
+                <div class="logo-text">
+                    <h1>AMAP des Jalles</h1>
+                    <p>Saint-Medard-en-Jalles</p>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="producteurs.html">Producteurs</a></li>
+                    <li><a href="asso.html">Association</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="padding: 50px 20px;">
+        <div class="hero-content">
+            <h1>Vue d'ensemble producteurs / produits / prix</h1>
+            <p class="no-print">Recapitulatif annuel a imprimer (janvier) et a distribuer aux adherents.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+            <div id="priveBanner" class="recap-prive-banner" style="display: none;">
+                &#128274; <strong>Version interne</strong> &mdash; cette page affiche les prix et informations reservees aux adherents.
+            </div>
+
+            <p class="recap-meta">Genere le <span id="genDate"></span> &middot; <span id="prodCount"></span> producteurs actifs</p>
+
+            <table class="recap-table" id="recapTable">
+                <thead>
+                    <tr>
+                        <th style="width: 28%;">Producteur</th>
+                        <th style="width: 12%;">Ville / Distance</th>
+                        <th style="width: 12%;">Bio</th>
+                        <th>Produits</th>
+                        <th class="prive-col" style="width: 12%; display: none;">Prix</th>
+                    </tr>
+                </thead>
+                <tbody id="recapBody"></tbody>
+            </table>
+
+            <div class="recap-qr no-print">
+                <img id="qrImage" alt="QR code version interne">
+                <div>
+                    <strong>Version interne</strong>
+                    <p class="recap-meta" style="margin: 4px 0;">Scanner pour acceder a la version avec prix (lien privatif).</p>
+                    <p class="recap-meta" id="qrUrl"></p>
+                </div>
+            </div>
+
+            <div class="text-center mt-20 no-print">
+                <button class="btn btn-accent" onclick="window.print()">&#128424; Imprimer</button>
+                <a href="index.html" class="btn btn-secondary">Retour a l'accueil</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="no-print">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>AMAP des Jalles</h4>
+                <p>Pole Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Medard-en-Jalles</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="producteurs.html">Producteurs</a></li>
+                    <li><a href="asso.html">Association</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>2024-2026 AMAP des Jalles</p>
+        </div>
+    </footer>
+
+    <script src="js/producers-data.js"></script>
+    <script>
+        // Token pour la version interne. À durcir (cf. plan, point ouvert A5c).
+        const PRIVATE_TOKEN = 'amap-jalles-2026';
+
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('open');
+        }
+
+        function isPrive() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('k') === PRIVATE_TOKEN;
+        }
+
+        function renderRecap() {
+            const prive = isPrive();
+            const banner = document.getElementById('priveBanner');
+            if (prive) banner.style.display = 'block';
+
+            document.querySelectorAll('.prive-col').forEach(el => {
+                el.style.display = prive ? 'table-cell' : 'none';
+            });
+
+            const tbody = document.getElementById('recapBody');
+            const list = getActiveProducers();
+            document.getElementById('prodCount').textContent = list.length;
+            document.getElementById('genDate').textContent = new Date().toLocaleDateString('fr-FR');
+
+            tbody.innerHTML = list.map(p => {
+                const bioLabel = p.bio
+                    ? `<span class="badge-bio" title="${p.bio.label}">${p.bio.label}</span>`
+                    : (p.bio === null && p.category !== 'autres' ? '<span class="recap-meta">non bio</span>' : '<span class="recap-meta">&mdash;</span>');
+                const products = p.products
+                    .filter(prod => prod.active)
+                    .map(prod => `<div class="recap-product">&middot; ${prod.name}${prive && prod.price ? ` &mdash; <strong>${prod.price}</strong>` : ''}</div>`)
+                    .join('');
+                return `<tr>
+                    <td>
+                        <div class="recap-producer">${p.emoji} ${p.name}</div>
+                        <div class="recap-meta">${p.farmer}</div>
+                    </td>
+                    <td>${p.city}<br><span class="recap-meta">${p.distanceKm} km</span></td>
+                    <td>${bioLabel}</td>
+                    <td>${products || '<span class="recap-meta">&mdash;</span>'}</td>
+                    ${prive ? '<td><span class="recap-meta">a completer</span></td>' : ''}
+                </tr>`;
+            }).join('');
+        }
+
+        function renderQr() {
+            const url = new URL(window.location.href);
+            url.searchParams.set('k', PRIVATE_TOKEN);
+            const priveUrl = url.toString();
+            document.getElementById('qrUrl').textContent = priveUrl;
+            document.getElementById('qrImage').src =
+                `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(priveUrl)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            renderRecap();
+            renderQr();
+        });
+    </script>
+</body>
+
+</html>
