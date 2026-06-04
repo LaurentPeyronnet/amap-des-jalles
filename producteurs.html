@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos Producteurs - AMAP des Jalles</title>
     <meta name="description"
-        content="Decouvrez les producteurs partenaires de l'AMAP des Jalles : maraichers, eleveurs, boulangers, tous engages dans une agriculture locale et responsable.">
+        content="Découvrez les producteurs partenaires de l'AMAP des Jalles : maraîchers, éleveurs, boulangers, tous engagés dans une agriculture locale et responsable.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
                 <img src="images/logo.png" alt="AMAP des Jalles" class="logo-img">
                 <div class="logo-text">
                     <h1>AMAP des Jalles</h1>
-                    <p>Saint-Medard-en-Jalles</p>
+                    <p>Saint-Médard-en-Jalles</p>
                 </div>
             </a>
             <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
@@ -31,10 +31,9 @@
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="producteurs.html" class="active">Producteurs</a></li>
-                    <li><a href="asso.html">Association</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="asso.html">Association</a></li>                    <li><a href="contact.html">Contact</a></li>
                     <li><a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-accent amapj-btn"
-                            target="_blank" title="Acceder a AMAPJ">
+                            target="_blank" title="Accéder à AMAPJ">
                             <img src="https://s2.amapj.fr/p/VAADIN/themes/amapj/favicon.ico" alt="AMAPJ"
                                 style="width: 20px; height: 20px; vertical-align: middle;">
                         </a></li>
@@ -47,7 +46,7 @@
     <section class="hero" style="padding: 50px 20px;">
         <div class="hero-content">
             <h1>Nos Producteurs</h1>
-            <p>Des producteurs passionnes qui cultivent, elevent et transforment avec amour pour vous offrir le meilleur
+            <p>Des producteurs passionnés qui cultivent, élèvent et transforment avec amour pour vous offrir le meilleur
                 de leur terroir.</p>
         </div>
     </section>
@@ -57,7 +56,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Carte des producteurs</h2>
-                <p>Localisation de nos partenaires autour de Saint-Medard-en-Jalles.</p>
+                <p>Localisation de nos partenaires autour de Saint-Médard-en-Jalles.</p>
             </div>
             <div id="producersMap" class="map-container" style="height: 420px;"></div>
         </div>
@@ -75,14 +74,14 @@
                     <select id="categoryFilter"
                         style="padding: 12px 15px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1em;"
                         onchange="renderProducers()">
-                        <option value="">Toutes les categories</option>
-                        <option value="legumes">Legumes</option>
+                        <option value="">Toutes les catégories</option>
+                        <option value="legumes">Légumes</option>
                         <option value="viande">Viande / Volaille</option>
                         <option value="produits-laitiers">Fromages</option>
                         <option value="pain">Pain</option>
                         <option value="fruits">Fruits</option>
                         <option value="boissons">Vin / Boissons</option>
-                        <option value="autres">Autres (oeufs, miel, tisanes...)</option>
+                        <option value="autres">Autres (œufs, miel, tisanes...)</option>
                     </select>
                     <label style="display: flex; align-items: center; gap: 6px; font-size: 0.9em;">
                         <input type="checkbox" id="bioOnly" onchange="renderProducers()"> Bio uniquement
@@ -91,7 +90,7 @@
             </div>
 
             <div class="card-grid" id="producersGrid"></div>
-            <p id="noResults" class="text-center mt-20" style="display: none; color: #6b7280;">Aucun producteur ne correspond aux criteres.</p>
+            <p id="noResults" class="text-center mt-20" style="display: none; color: #6b7280;">Aucun producteur ne correspond aux critères.</p>
         </div>
     </section>
 
@@ -99,12 +98,12 @@
     <section class="section section-light">
         <div class="container text-center">
             <h2>Envie de rencontrer nos producteurs ?</h2>
-            <p style="max-width: 600px; margin: 20px auto;">Nous organisons regulierement des visites de fermes et des
-                evenements pour creer du lien entre adherents et producteurs.</p>
+            <p style="max-width: 600px; margin: 20px auto;">Nous organisons régulièrement des visites de fermes et des
+                événements pour créer du lien entre adhérents et producteurs.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="contact.html" class="btn btn-accent">Nous rejoindre</a>
                 <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" class="btn btn-secondary" target="_blank"
-                    style="border: 2px solid var(--color-secondary); color: var(--color-secondary);">Acceder a AMAPJ</a>
+                    style="border: 2px solid var(--color-secondary); color: var(--color-secondary);">Accéder à AMAPJ</a>
             </div>
         </div>
     </section>
@@ -115,19 +114,18 @@
             <div class="footer-section">
                 <h4>AMAP des Jalles</h4>
                 <p>Association pour le Maintien d'une Agriculture Paysanne</p>
-                <p>Pole Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Medard-en-Jalles</p>
+                <p>Pôle Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Médard-en-Jalles</p>
             </div>
             <div class="footer-section">
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="producteurs.html">Nos producteurs</a></li>
-                    <li><a href="asso.html">Association</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="asso.html">Association</a></li>                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Espace adherent</h4>
+                <h4>Espace adhérent</h4>
                 <ul>
                     <li><a href="https://s2.amapj.fr/p/saint-medard-en-jalles" target="_blank">&#128279; Plateforme
                             AMAPJ</a></li>
@@ -135,8 +133,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>2024-2026 AMAP des Jalles - Donnees extraites de AMAPJ</p>
-            <p class="footer-version">Derniere mise a jour : 4 juin 2026</p>
+            <p>2024-2026 AMAP des Jalles - Données extraites de AMAPJ</p>
+            <p class="footer-version">Dernière mise à jour : 4 juin 2026</p>
         </div>
     </footer>
 
@@ -212,7 +210,9 @@
         }
 
         function renderMap() {
-            const list = getActiveProducers().filter(p => p.coords && p.distanceKm <= 200);
+            // On affiche TOUS les producteurs géolocalisés (y compris lointains, ex. châtaignes),
+            // mais on calibre le zoom initial sur les producteurs <= 200 km.
+            const list = getActiveProducers().filter(p => p.coords);
             const map = L.map('producersMap');
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&#169; OpenStreetMap contributors'
@@ -226,7 +226,7 @@
             // Marqueurs producteurs
             const bounds = [[amapInfo.coords.lat, amapInfo.coords.lng]];
             list.forEach(p => {
-                bounds.push([p.coords.lat, p.coords.lng]);
+                if (p.distanceKm == null || p.distanceKm <= 200) bounds.push([p.coords.lat, p.coords.lng]);
                 const badge = p.bio && p.bio.certified
                     ? ` <a class="badge-bio" href="${certificateUrl(p.bio)}" target="_blank" rel="noopener" title="Voir le certificat bio (annuaire Agence Bio / TRACES)">&#127807; ${p.bio.label}</a>`
                     : '';
@@ -234,7 +234,7 @@
                     .addTo(map)
                     .bindPopup(`<strong>${p.emoji} ${p.name}</strong>${badge}<br>${p.city} (${p.distanceKm} km)`);
             });
-            // Cadre ajusté aux coordonnées exactes des marqueurs + légère marge
+            // Cadre ajusté aux coordonnées des producteurs <= 200 km + légère marge
             map.fitBounds(bounds, { padding: [20, 20] });
         }
 

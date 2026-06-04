@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue d'ensemble producteurs - AMAP des Jalles</title>
-    <meta name="description" content="Recapitulatif des producteurs, produits et prix de l'AMAP des Jalles - version imprimable.">
+    <meta name="description" content="Récapitulatif des producteurs, produits et prix de l'AMAP des Jalles - version imprimable.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
                 <img src="images/logo.png" alt="AMAP des Jalles" class="logo-img">
                 <div class="logo-text">
                     <h1>AMAP des Jalles</h1>
-                    <p>Saint-Medard-en-Jalles</p>
+                    <p>Saint-Médard-en-Jalles</p>
                 </div>
             </a>
             <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
@@ -54,8 +54,7 @@
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="producteurs.html">Producteurs</a></li>
-                    <li><a href="asso.html">Association</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="asso.html">Association</a></li>                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -64,7 +63,7 @@
     <section class="hero" style="padding: 50px 20px;">
         <div class="hero-content">
             <h1>Vue d'ensemble producteurs / produits / prix</h1>
-            <p class="no-print">Recapitulatif annuel a imprimer (janvier) et a distribuer aux adherents.</p>
+            <p class="no-print">Récapitulatif annuel à imprimer (janvier) et à distribuer aux adhérents.</p>
         </div>
     </section>
 
@@ -72,10 +71,10 @@
         <div class="container">
 
             <div id="priveBanner" class="recap-prive-banner" style="display: none;">
-                &#128274; <strong>Version interne</strong> &mdash; cette page affiche les prix et informations reservees aux adherents.
+                &#128274; <strong>Version interne</strong> &mdash; cette page affiche les prix et informations réservées aux adhérents.
             </div>
 
-            <p class="recap-meta">Genere le <span id="genDate"></span> &middot; <span id="prodCount"></span> producteurs actifs</p>
+            <p class="recap-meta">Généré le <span id="genDate"></span> &middot; <span id="prodCount"></span> producteurs actifs</p>
 
             <table class="recap-table" id="recapTable">
                 <thead>
@@ -94,14 +93,14 @@
                 <img id="qrImage" alt="QR code version interne">
                 <div>
                     <strong>Version interne</strong>
-                    <p class="recap-meta" style="margin: 4px 0;">Scanner pour acceder a la version avec prix (lien privatif).</p>
+                    <p class="recap-meta" style="margin: 4px 0;">Scanner pour accéder à la version avec prix (lien privatif).</p>
                     <p class="recap-meta" id="qrUrl"></p>
                 </div>
             </div>
 
             <div class="text-center mt-20 no-print">
                 <button class="btn btn-accent" onclick="window.print()">&#128424; Imprimer</button>
-                <a href="index.html" class="btn btn-secondary">Retour a l'accueil</a>
+                <a href="index.html" class="btn btn-secondary">Retour à l'accueil</a>
             </div>
         </div>
     </section>
@@ -110,21 +109,20 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>AMAP des Jalles</h4>
-                <p>Pole Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Medard-en-Jalles</p>
+                <p>Pôle Municipal Simone Veil, 26 Rue Aurel Chazeau, 33160 Saint-Médard-en-Jalles</p>
             </div>
             <div class="footer-section">
                 <h4>Navigation</h4>
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="producteurs.html">Producteurs</a></li>
-                    <li><a href="asso.html">Association</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="asso.html">Association</a></li>                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>2024-2026 AMAP des Jalles</p>
-            <p class="footer-version">Derniere mise a jour : 4 juin 2026</p>
+            <p class="footer-version">Dernière mise à jour : 4 juin 2026</p>
         </div>
     </footer>
 
@@ -169,10 +167,10 @@
                         <div class="recap-producer">${p.emoji} ${p.name}</div>
                         <div class="recap-meta">${p.farmer}</div>
                     </td>
-                    <td>${p.city}<br><span class="recap-meta">${p.distanceKm} km</span></td>
+                    <td>${p.city}<br><span class="recap-meta">${p.distanceKm != null ? p.distanceKm + ' km' : '&mdash;'}</span></td>
                     <td>${bioLabel}</td>
                     <td>${products || '<span class="recap-meta">&mdash;</span>'}</td>
-                    ${prive ? '<td><span class="recap-meta">a completer</span></td>' : ''}
+                    ${prive ? '<td><span class="recap-meta">à compléter</span></td>' : ''}
                 </tr>`;
             }).join('');
         }
