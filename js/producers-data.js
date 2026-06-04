@@ -38,7 +38,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/134462/scea-le-jardin-de-quentin' },
+        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/134462/scea-le-jardin-de-quentin', cert: 'scea le jardin de quentin' },
         coords: { lat: 44.8842, lng: -0.6500 },
         address: 'SCEA Le Jardin de Quentin',
         city: 'Eysines',
@@ -59,7 +59,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/132210/molina-elodie' },
+        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/132210/molina-elodie', cert: 'molina elodie' },
         coords: { lat: 44.9097, lng: -0.7242 },
         address: '41 route de Mautemps',
         city: 'Saint-Aubin-de-Médoc',
@@ -79,7 +79,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/66236/la-collective' },
+        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/66236/la-collective', cert: 'sarl la collective' },
         coords: { lat: 44.8194, lng: -0.4906 },
         address: 'Fournil partagé',
         city: 'Latresne (déménagement Bègles en 2026)',
@@ -103,6 +103,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
+        // Pas de "cert" : opérateur introuvable dans TRACES NT (06/2026) — on garde la fiche Agence Bio.
         bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/306410/earl-manieu-noel' },
         coords: { lat: 44.7917, lng: -0.1714 },
         address: 'Ferme Manieu Noël',
@@ -151,7 +152,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/141717/labegurie-laurent-michel' },
+        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/141717/labegurie-laurent-michel', cert: 'labegurie laurent' },
         coords: { lat: 44.9094, lng: -0.6383 },
         address: 'La Ferme de la Forteresse',
         city: 'Blanquefort',
@@ -172,7 +173,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/145616/musso-alice-anne-marie' },
+        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/145616/musso-alice-anne-marie', cert: 'musso alice' },
         coords: { lat: 45.1494, lng: -0.8378 },
         address: 'La Ferme d\'Alice',
         city: 'Saint-Laurent-Médoc',
@@ -213,7 +214,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB depuis 1964', sourceUrl: 'https://annuaire.agencebio.org/operateur/28958/scea-vignobles-barron' },
+        bio: { certified: true, label: 'AB depuis 1964', sourceUrl: 'https://annuaire.agencebio.org/operateur/28958/scea-vignobles-barron', cert: 'scea vignobles barron' },
         coords: { lat: 44.6886, lng: -0.5328 },
         address: '20 av Georges Hébert',
         city: 'La Brède',
@@ -234,7 +235,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/113583/scea-les-coteaux-de-boutau' },
+        bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/113583/scea-les-coteaux-de-boutau', cert: 'coteaux de boutau' },
         coords: { lat: 44.5839, lng: -0.0431 },
         address: 'SCEA Les Coteaux de Boutau',
         city: 'Gironde-sur-Dropt / Les Esseintes',
@@ -257,7 +258,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'Ecocert FR-BIO-01', sourceUrl: 'https://annuaire.agencebio.org/operateur/150230/earl-la-ferme-des-deux-rivieres' },
+        bio: { certified: true, label: 'Ecocert FR-BIO-01', sourceUrl: 'https://annuaire.agencebio.org/operateur/150230/earl-la-ferme-des-deux-rivieres', cert: 'earl la ferme des deux rivieres' },
         coords: { lat: 44.5708, lng: -0.0656 },
         address: '9 Pignot Nord',
         city: 'Barie',
@@ -300,7 +301,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'Qualisud', sourceUrl: 'https://annuaire.agencebio.org/operateur/6567/vital-vanessa' },
+        bio: { certified: true, label: 'Qualisud', sourceUrl: 'https://annuaire.agencebio.org/operateur/6567/vital-vanessa', cert: 'vital vanessa' },
         coords: { lat: 44.9056, lng: -0.7000 },
         address: 'Le Jardin Ti\'Zen',
         city: 'Le Taillan-Médoc',
@@ -325,7 +326,7 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'AB + AOP', sourceUrl: 'https://annuaire.agencebio.org/operateur/281129/guesdon-alexandre-paul-marcel' },
+        bio: { certified: true, label: 'AB + AOP', sourceUrl: 'https://annuaire.agencebio.org/operateur/281129/guesdon-alexandre-paul-marcel', cert: 'guesdon alexandre' },
         coords: { lat: 44.7236, lng: 4.2731 },
         address: '2310 chemin de Veyrières',
         city: 'Chirols (Ardèche)',
@@ -366,12 +367,12 @@ const producers = [
         active: true,
         contractYear: 2026,
         archived: false,
-        bio: { certified: true, label: 'Ecocert', sourceUrl: 'https://annuaire.agencebio.org/operateur/41537/disson-laurent-marcel' },
-        coords: { lat: 44.8964, lng: -0.7222 },
-        address: 'La champignonnière Lo Champi',
-        city: 'Saint-Médard-en-Jalles',
-        distanceKm: 0,
-        description: 'Champignonnière locale, variétés selon saison.',
+        bio: { certified: true, label: 'Ecocert', sourceUrl: 'https://annuaire.agencebio.org/operateur/41537/disson-laurent-marcel', cert: 'disson laurent' },
+        coords: { lat: 44.95329597984743, lng: -0.321833134826021 },
+        address: '1 Rte des Crêtes',
+        city: 'Saint-Germain-de-la-Rivière',
+        distanceKm: 35,
+        description: 'Champignonnière en galeries souterraines (pleurotes, champignons de Paris, shiitakés) sur substrats bio AB.',
         products: [
             { name: 'Champignons variés', active: true }
         ],
@@ -489,6 +490,31 @@ const amapInfo = {
 // Filtre par défaut : ne renvoie que les producteurs actifs et non archivés
 function getActiveProducers() {
     return producers.filter(p => p.active && !p.archived);
+}
+
+/**
+ * Lien vers le certificat bio le plus fiable possible.
+ *
+ * Le bouton « Voir le certificat » des fiches Agence Bio pointe vers l'annuaire
+ * TRACES NT (Commission européenne) avec une recherche par identifiant numérique,
+ * qui renvoie souvent un résultat vide. La recherche TRACES par *nom* d'opérateur
+ * fonctionne, mais le nom Agence Bio (avec 2e/3e prénoms) ne correspond pas
+ * toujours à celui de TRACES (qui fait un ET sur tous les mots de la requête).
+ *
+ * On stocke donc, dans bio.cert, une requête TRACES *vérifiée manuellement* qui
+ * retrouve bien l'opérateur. À défaut (cert absent — opérateur introuvable dans
+ * TRACES ou source non Agence Bio), on retombe sur bio.sourceUrl.
+ *
+ * @param {object|null} bio
+ * @returns {string} URL du certificat / de la source
+ */
+function certificateUrl(bio) {
+    if (!bio) return '#';
+    if (bio.cert) {
+        return 'https://webgate.ec.europa.eu/tracesnt/directory/publication/organic-operator/index#!?query='
+            + encodeURIComponent(bio.cert) + '&sort=-issuedOn';
+    }
+    return bio.sourceUrl || '#';
 }
 
 // === Marqueurs Leaflet partagés (index, producteurs, contact) ===

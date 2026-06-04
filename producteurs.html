@@ -136,6 +136,7 @@
         </div>
         <div class="footer-bottom">
             <p>2024-2026 AMAP des Jalles - Donnees extraites de AMAPJ</p>
+            <p class="footer-version">Derniere mise a jour : 4 juin 2026</p>
         </div>
     </footer>
 
@@ -160,8 +161,8 @@
         function bioBadge(bio) {
             if (!bio || !bio.certified) return '';
             const label = bio.label || 'Bio';
-            const url = bio.sourceUrl || '#';
-            return `<a class="badge-bio" href="${url}" target="_blank" rel="noopener" title="Source : ${url}">&#127807; ${label}</a>`;
+            const url = certificateUrl(bio);
+            return `<a class="badge-bio" href="${url}" target="_blank" rel="noopener" title="Voir le certificat bio (annuaire Agence Bio / TRACES)">&#127807; ${label}</a>`;
         }
 
         function productList(products) {
@@ -227,7 +228,7 @@
             list.forEach(p => {
                 bounds.push([p.coords.lat, p.coords.lng]);
                 const badge = p.bio && p.bio.certified
-                    ? ` <a class="badge-bio" href="${p.bio.sourceUrl}" target="_blank" rel="noopener" title="Voir la fiche officielle Agence Bio">&#127807; ${p.bio.label}</a>`
+                    ? ` <a class="badge-bio" href="${certificateUrl(p.bio)}" target="_blank" rel="noopener" title="Voir le certificat bio (annuaire Agence Bio / TRACES)">&#127807; ${p.bio.label}</a>`
                     : '';
                 L.marker([p.coords.lat, p.coords.lng], { icon: emojiMarkerIcon(p.emoji), title: p.name })
                     .addTo(map)
