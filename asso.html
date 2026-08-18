@@ -20,10 +20,33 @@
         .doc-list li { padding: 10px 0; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .doc-list li:last-child { border-bottom: none; }
         .doc-meta { color: #6b7280; font-size: 0.85em; }
-        .trombi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .trombi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 170px)); gap: 16px; }
         .trombi-card { text-align: center; padding: 20px; background: #f9fafb; border-radius: 8px; }
-        .trombi-photo { width: 100px; height: 100px; border-radius: 50%; background: #e5e7eb; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 2em; color: #9ca3af; }
-        .placeholder-note { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 4px; font-size: 0.9em; color: #78350f; }
+        .trombi-photo { width: 72px; height: 72px; border-radius: 50%; background: #e5e7eb; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 2em; color: #9ca3af; }
+        .source-note { color: var(--mute); font-size: 0.85em; margin-top: 16px; }
+
+        /* Reperes cles de l'association */
+        .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+        .fact { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px; }
+        .fact-value { font-weight: 900; font-size: 1.6rem; line-height: 1.15; color: var(--ink); }
+        .fact-label { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.78rem; font-weight: 700; color: var(--mute); margin-top: 4px; }
+
+        /* Reglement interieur : liste numerotee lisible */
+        .rules { counter-reset: rule; list-style: none; padding: 0; margin: 0; }
+        .rules li { counter-increment: rule; position: relative; padding: 12px 0 12px 46px; border-bottom: 1px solid var(--line); }
+        .rules li:last-child { border-bottom: none; }
+        .rules li::before { content: counter(rule); position: absolute; left: 0; top: 12px; width: 30px; height: 30px; border-radius: 50%; background: var(--green-soft); color: var(--green-dark); font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; }
+        .doc-status { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); font-size: 0.78rem; font-weight: 800; }
+
+        /* Statuts : articles */
+        .article-list { list-style: none; padding: 0; margin: 0; }
+        .article-list li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+        .article-list li:last-child { border-bottom: none; }
+        .article-list strong { color: var(--ink); }
+
+        /* Trombinoscope */
+        .trombi-card h4 { margin: 0 0 4px; }
+        .trombi-role { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--green-soft); color: var(--green-dark); font-size: 0.75rem; font-weight: 800; }
 
         /* Frise annuelle horizontale (galerie) */
         .timeline-wrap { overflow-x: auto; padding: 30px 10px 20px; }
@@ -63,42 +86,14 @@
         .timeline-event strong { display: block; color: #111827; margin-bottom: 2px; }
 
         /* Galerie */
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-        .gallery-item {
-            aspect-ratio: 4/3;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5em;
-            color: #9ca3af;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.2s;
-        }
-        .gallery-item:hover { transform: scale(1.02); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.65);
-            color: white;
-            padding: 6px 10px;
-            font-size: 0.8em;
-        }
-        .event-block { margin-bottom: 40px; }
+        .event-block { padding: 14px 0; border-bottom: 1px solid var(--line); }
+        .event-block:last-child { border-bottom: none; }
+        .event-block h3 { margin: 0 0 6px; }
+        .event-block p { margin: 0; color: var(--mute); }
         .event-block h3 { display: flex; align-items: center; gap: 10px; }
         .event-block h3 .event-date { color: #6b7280; font-size: 0.7em; font-weight: 400; }
 
         /* Lightbox <dialog> */
-        dialog.lightbox { border: none; padding: 0; background: transparent; max-width: 95vw; max-height: 95vh; }
-        dialog.lightbox::backdrop { background: rgba(0, 0, 0, 0.85); }
-        dialog.lightbox img { max-width: 90vw; max-height: 85vh; display: block; border-radius: 8px; }
-        dialog.lightbox .close { position: absolute; top: 10px; right: 10px; background: white; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.4em; cursor: pointer; }
     </style>
 </head>
 
@@ -133,8 +128,8 @@
     <section class="hero" style="padding: 50px 20px;">
         <div class="hero-content">
             <h1>L'association</h1>
-            <p>AMAP des Jalles &mdash; Association loi 1901, gouvernance collégiale, distribution chaque jeudi au Pôle
-                Municipal Simone Veil.</p>
+            <p>AMAP des Jalles &mdash; association loi 1901 fondée le 9 février 2012, administrée par un conseil
+                collégial de 12 amapien&middot;ne&middot;s. Distribution chaque jeudi au Pôle Municipal Simone Veil.</p>
         </div>
     </section>
 
@@ -142,6 +137,7 @@
     <section class="section">
         <div class="container">
             <nav class="asso-toc" aria-label="Sommaire">
+                <a href="#reperes">Repères</a>
                 <a href="#reglement">Règlement</a>
                 <a href="#statuts">Statuts</a>
                 <a href="#charte">Charte</a>
@@ -153,6 +149,51 @@
         </div>
     </section>
 
+    <!-- Repères -->
+    <section class="section" id="reperes">
+        <div class="container">
+            <div class="section-title">
+                <h2>L'association en bref</h2>
+                <p>Les repères de l'AMAP des Jalles, à jour de l'assemblée générale du 27 novembre 2025.</p>
+            </div>
+            <div class="fact-grid">
+                <div class="fact">
+                    <div class="fact-value">9 février 2012</div>
+                    <div class="fact-label">Assemblée constitutive</div>
+                </div>
+                <div class="fact">
+                    <div class="fact-value">48 familles</div>
+                    <div class="fact-label">Adhérentes en 2025</div>
+                </div>
+                <div class="fact">
+                    <div class="fact-value">12 membres</div>
+                    <div class="fact-label">Conseil collégial</div>
+                </div>
+                <div class="fact">
+                    <div class="fact-value">8 &euro; / an</div>
+                    <div class="fact-label">Cotisation 2026</div>
+                </div>
+            </div>
+            <div class="card mt-20">
+                <h3>&#127963; Identité de l'association</h3>
+                <ul class="article-list">
+                    <li><strong>Dénomination</strong> &mdash; AMAP DES JALLES, Association pour le Maintien de
+                        l'Agriculture Paysanne de Saint-Médard-en-Jalles.</li>
+                    <li><strong>Forme</strong> &mdash; association loi 1901 à but non lucratif, durée illimitée,
+                        gestion désintéressée. L'association n'achète ni ne vend de denrées.</li>
+                    <li><strong>Siège social</strong> &mdash; Mairie de Saint-Médard-en-Jalles, DACAJ, Place de
+                        l'Hôtel de Ville, CS 60022, 33167 Saint-Médard-en-Jalles.</li>
+                    <li><strong>Lieu de distribution</strong> &mdash; Pôle Municipal Simone Veil, 26 rue Aurel
+                        Chazeau, 33160 Saint-Médard-en-Jalles &mdash; chaque jeudi de 19h à 19h45.</li>
+                    <li><strong>Gouvernance</strong> &mdash; conseil collégial de douze membres élus en assemblée
+                        générale, renouvelé par tiers chaque année. Le bureau est désigné au sein du collège.</li>
+                    <li><strong>Producteurs</strong> &mdash; membres de droit de l'association, exempts de
+                        cotisation et sans droit de vote.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Règlement -->
     <section class="section section-light" id="reglement">
         <div class="container">
@@ -161,22 +202,61 @@
                 <p>Règles de fonctionnement de l'AMAP, droits et devoirs des adhérents.</p>
             </div>
             <div class="card">
-                <ul class="doc-list">
-                    <li>
-                        <span>&#128221; Règlement intérieur &mdash; version à jour</span>
-                        <span><a href="documents/reglement-interieur.pdf" class="btn btn-secondary">Télécharger PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
+                <p><span class="doc-status">En vigueur depuis le 1<sup>er</sup> mars 2025</span></p>
+                <ol class="rules mt-20">
+                    <li>Adhérer à l'AMAP, c'est en accepter le fonctionnement défini par ses statuts et le présent
+                        règlement.</li>
+                    <li>L'adhésion implique l'inscription préalable sur la liste d'attente. Toute nouvelle adhésion
+                        est validée par le conseil collégial. Priorité est donnée aux habitants de
+                        Saint-Médard-en-Jalles.</li>
+                    <li>La communication de l'association se fait principalement par courriel.</li>
+                    <li>La prise de contrat se fait sur l'outil numérique AMAPJ&nbsp;:
+                        <a href="https://s2.amapj.fr/p/saint-medard-en-jalles" target="_blank"
+                            rel="noopener">s2.amapj.fr/p/saint-medard-en-jalles</a>.
                     </li>
+                    <li>Obligation de souscrire au moins deux contrats réguliers (maraîcher, pommes, œufs, fromages,
+                        pains, poulets, poissons).</li>
+                    <li>La distribution a lieu le jeudi de 19h à 19h45.</li>
+                    <li>Une permanence est assurée par 2 personnes chaque semaine, selon le planning établi par
+                        inscription sur
+                        <a href="https://s2.amapj.fr/p/saint-medard-en-jalles#!/mes_permanences" target="_blank"
+                            rel="noopener">AMAPJ &mdash; mes permanences</a>.
+                    </li>
+                    <li>La permanence consiste à venir à 18h45 le jeudi&nbsp;: préparer les tables et les feuilles
+                        d'émargement, aider les producteurs au déchargement, accueillir les personnes qui se
+                        renseignent, nettoyer et ranger en fin de distribution, fermer le cadenas.</li>
+                    <li>Remplacement&nbsp;: la personne empêchée doit trouver elle-même son remplaçant et vérifier
+                        qu'elle est effectivement remplacée.</li>
+                    <li>Produits oubliés en fin de distribution&nbsp;: à partir de 19h30, les personnes de
+                        permanence appellent les amapiens concernés (liste dans le classeur) et laissent un message
+                        si besoin. Le produit est conservé dans de bonnes conditions d'hygiène si possible&nbsp;;
+                        sans retour dans un délai raisonnable, il est donné ou consommé pour éviter la perte. Aucun
+                        reproche ne pourra être fait aux personnes de permanence.</li>
+                    <li>En cas d'absence, informer précisément la personne qui vient chercher le panier à votre
+                        place, avec une liste détaillée.</li>
+                    <li>Lors de l'enlèvement des produits, il est impératif de signer les feuilles d'émargement
+                        correspondantes.</li>
+                    <li>Les amapiens de permanence portent les tabliers mis à leur disposition, pour être mieux
+                        identifiés.</li>
+                    <li>La liste de diffusion sert uniquement à informer sur le fonctionnement de l'AMAP. Toute
+                        autre communication est à proscrire.</li>
+                    <li>En cas de rupture dans la production, les amapiens acceptent des paniers moindres, compensés
+                        plus tard &mdash; ou pas de panier du tout, compensé ou non.</li>
+                    <li>En cas de problème sur un produit, communiquer d'abord avec le coordinateur concerné. Aucune
+                        polémique ne sera acceptée sur la liste de diffusion.</li>
+                    <li>Tout manquement aux règles pourra entraîner l'exclusion de l'amapien après un premier rappel
+                        à l'ordre, sans compensation. Les chèques émis restent la propriété du producteur.</li>
+                    <li>Le montant de la cotisation annuelle forfaitaire est fixé par le conseil collégial et validé
+                        par l'assemblée générale. Elle est payable par chèque à l'ordre de AMAP DES JALLES entre le
+                        1<sup>er</sup> et le 31 décembre pour l'année suivante.</li>
+                </ol>
+                <ul class="doc-list mt-20">
                     <li>
-                        <span>&#128247; Clause droit à l'image</span>
-                        <span><a href="documents/droit-image.pdf" class="btn btn-secondary">Télécharger PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
+                        <span>&#128221; Règlement intérieur &mdash; version signable (coupon d'adhésion)</span>
+                        <span><a href="documents/reglement-interieur.pdf" class="btn btn-secondary">Télécharger
+                                PDF</a></span>
                     </li>
                 </ul>
-                <p class="placeholder-note mt-20">
-                    <strong>À valider en CC :</strong> la clause droit à l'image sera-t-elle intégrée au règlement ou
-                    fournie comme document séparé à signer lors de l'adhésion ?
-                </p>
             </div>
         </div>
     </section>
@@ -186,14 +266,63 @@
         <div class="container">
             <div class="section-title">
                 <h2>Statuts</h2>
-                <p>Statuts de l'association loi 1901.</p>
+                <p>Statuts de l'association loi 1901, adoptés le 17 janvier 2012 et approuvés à l'unanimité par
+                    l'assemblée générale constitutive du 9 février 2012.</p>
             </div>
             <div class="card">
-                <ul class="doc-list">
+                <h3>&#128220; Objet de l'association (article 2)</h3>
+                <ul class="article-list">
+                    <li>Regrouper des consommateurs conscients et désireux de s'impliquer dans l'économie solidaire
+                        et dans la qualité de leur alimentation.</li>
+                    <li>Respecter et faire respecter les principes de l'agriculture paysanne&nbsp;: promouvoir une
+                        agriculture durable, socialement équitable et écologiquement saine&nbsp;; passer un contrat
+                        écrit entre chaque consommateur et le(s) producteur(s), basé sur un engagement réciproque.
+                    </li>
+                    <li>Mettre en relation les adhérents et les producteurs, en organisant les relations entre
+                        partenaires et la distribution des produits dans le cadre d'une gestion désintéressée.
+                        L'association ne participe pas à l'achat et à la vente des denrées.</li>
+                    <li>(Re)créer un lien social entre monde urbain et monde rural&nbsp;: visites et ateliers
+                        découverte à la ferme, réunions thématiques.</li>
+                </ul>
+            </div>
+            <div class="card mt-20">
+                <h3>&#128203; Les 13 articles en résumé</h3>
+                <ul class="article-list">
+                    <li><strong>Art. 1 &mdash; Dénomination</strong> : « AMAP DES JALLES », Association pour le
+                        Maintien de l'Agriculture Paysanne de Saint-Médard-en-Jalles.</li>
+                    <li><strong>Art. 3 &mdash; Siège social</strong> : Mairie de Saint-Médard-en-Jalles (DACAJ),
+                        transférable sur décision du conseil collégial.</li>
+                    <li><strong>Art. 4 &mdash; Durée</strong> : illimitée.</li>
+                    <li><strong>Art. 5 &mdash; Composition</strong> : seules des personnes physiques adhèrent. Les
+                        membres actifs, dits « consom'acteurs », approuvent la charte des AMAP, respectent le
+                        règlement intérieur, s'impliquent dans la vie de l'association et s'engagent chaque saison à
+                        acheter une part de la production. Radiation pour démission, décès, non-paiement de la
+                        cotisation, non-respect des engagements ou de la charte, ou motif grave.</li>
+                    <li><strong>Art. 6 &mdash; Ressources</strong> : adhésions, dons, subventions. Le montant de la
+                        cotisation est fixé chaque année par l'assemblée générale ordinaire, sur proposition du
+                        conseil collégial.</li>
+                    <li><strong>Art. 7 &mdash; Conseil collégial</strong> : douze membres volontaires élus par
+                        l'assemblée générale, en charge de la comptabilité, du secrétariat et de l'administration.
+                        Renouvelé par tiers chaque année, membres sortants rééligibles, au moins deux réunions par
+                        an.</li>
+                    <li><strong>Art. 8 &amp; 9 &mdash; Assemblée générale ordinaire</strong> : une fois par an,
+                        convoquée par courriel au moins quinze jours à l'avance avec l'ordre du jour. Elle entend
+                        les rapports moral et financier, approuve les comptes et renouvelle le conseil collégial.
+                    </li>
+                    <li><strong>Art. 10 &mdash; Modification des statuts</strong> : uniquement en assemblée générale
+                        extraordinaire, convoquée par plus de la moitié du conseil collégial ou le tiers des
+                        adhérents.</li>
+                    <li><strong>Art. 11 &mdash; Vote</strong> : décisions prises à la majorité des membres actifs
+                        présents, sans condition de quorum.</li>
+                    <li><strong>Art. 12 &mdash; Règlement intérieur</strong> : établi par le conseil collégial pour
+                        fixer les points non précisés dans les statuts.</li>
+                    <li><strong>Art. 13 &mdash; Dissolution</strong> : prononcée uniquement par une assemblée
+                        générale extraordinaire convoquée à cet effet.</li>
+                </ul>
+                <ul class="doc-list mt-20">
                     <li>
-                        <span>&#128209; Statuts de l'AMAP des Jalles</span>
-                        <span><a href="documents/statuts.pdf" class="btn btn-secondary">Télécharger PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
+                        <span>&#128209; Statuts de l'AMAP des Jalles &mdash; 17 janvier 2012</span>
+                        <span><a href="documents/statuts-2012.pdf" class="btn btn-secondary">Télécharger PDF</a></span>
                     </li>
                 </ul>
             </div>
@@ -205,23 +334,23 @@
         <div class="container">
             <div class="section-title">
                 <h2>Charte des AMAP</h2>
-                <p>Les principes fondateurs du mouvement AMAP, partagés par notre association.</p>
+                <p>Les principes fondateurs du mouvement AMAP, que nos statuts reprennent à l'article 2 et que
+                    chaque adhérent approuve en rejoignant l'association.</p>
             </div>
             <div class="card">
                 <ul class="doc-list">
                     <li>
-                        <span>&#128214; Charte des AMAP (MIRAMAP)</span>
+                        <span>&#128214; Charte des AMAP &mdash; version de mars 2014 (MIRAMAP)</span>
                         <span>
-                            <a href="https://miramap.org/IMG/pdf/charte_des_amap_mars_2014.pdf" target="_blank"
+                            <a href="https://amapartage.fr/images/imagesCK/files/ressources/cont3/f4_charte-des-amap-mars-2014.pdf" target="_blank"
                                 rel="noopener" class="btn btn-secondary">Charte officielle &#8599;</a>
                         </span>
                     </li>
-                    <li>
-                        <span>&#127807; Charte locale AMAP des Jalles</span>
-                        <span><a href="documents/charte-locale.pdf" class="btn btn-secondary">Télécharger PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
-                    </li>
                 </ul>
+                <p class="source-note">
+                    L'AMAP des Jalles n'a pas de charte locale distincte&nbsp;: c'est la charte nationale de 2014
+                    qui fait référence, complétée par nos statuts et notre règlement intérieur.
+                </p>
             </div>
         </div>
     </section>
@@ -231,27 +360,78 @@
         <div class="container">
             <div class="section-title">
                 <h2>Assemblées Générales</h2>
-                <p>Comptes-rendus des AG annuelles et réunions de collège.</p>
+                <p>Comptes-rendus des assemblées générales annuelles.</p>
             </div>
             <div class="card">
-                <ul class="doc-list">
-                    <li>
-                        <span>&#128197; AG 2025</span>
-                        <span><a href="documents/ag-2025.pdf" class="btn btn-secondary">Compte-rendu PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
-                    </li>
-                    <li>
-                        <span>&#128197; AG 2024</span>
-                        <span><a href="documents/ag-2024.pdf" class="btn btn-secondary">Compte-rendu PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
-                    </li>
-                    <li>
-                        <span>&#128197; AG 2023</span>
-                        <span><a href="documents/ag-2023.pdf" class="btn btn-secondary">Compte-rendu PDF</a>
-                            <span class="doc-meta">(à déposer)</span></span>
-                    </li>
+                <h3>&#128499; AG du 27 novembre 2025</h3>
+                <div class="fact-grid mt-20">
+                    <div class="fact">
+                        <div class="fact-value">21 / 48</div>
+                        <div class="fact-label">Familles présentes</div>
+                    </div>
+                    <div class="fact">
+                        <div class="fact-value">260,46 &euro;</div>
+                        <div class="fact-label">Trésorerie au 27/11/2025</div>
+                    </div>
+                    <div class="fact">
+                        <div class="fact-value">8 &euro;</div>
+                        <div class="fact-label">Cotisation maintenue pour 2026</div>
+                    </div>
+                </div>
+                <ul class="article-list mt-20">
+                    <li><strong>Rapport d'activités</strong> approuvé à l'unanimité&nbsp;: 21 voix pour, 0 contre, 0
+                        abstention.</li>
+                    <li><strong>Rapport financier</strong> approuvé à l'unanimité&nbsp;: 828,81 &euro; de charges
+                        (assurance MAIF, abonnement AMAPJ, soirée galette, fête de l'AMAP, animation soupe,
+                        hébergement du site) pour 1 089,27 &euro; de recettes.</li>
+                    <li><strong>Conseil collégial</strong> renouvelé à l'unanimité, avec l'arrivée d'un nouveau
+                        membre&nbsp;; le bureau est ensuite désigné au sein du collège.</li>
                 </ul>
             </div>
+            <div class="card mt-20">
+                <h3>&#128197; AG du 19 décembre 2024</h3>
+                <div class="fact-grid mt-20">
+                    <div class="fact">
+                        <div class="fact-value">21 / 53</div>
+                        <div class="fact-label">Familles présentes</div>
+                    </div>
+                    <div class="fact">
+                        <div class="fact-value">718,97 &euro;</div>
+                        <div class="fact-label">Trésorerie au 19/12/2024</div>
+                    </div>
+                    <div class="fact">
+                        <div class="fact-value">8 &euro;</div>
+                        <div class="fact-label">Cotisation maintenue pour 2025</div>
+                    </div>
+                </div>
+                <ul class="article-list mt-20">
+                    <li><strong>Rapports d'activités et financier</strong> approuvés à l'unanimité&nbsp;: 21 voix
+                        pour, 0 contre, 0 abstention. Charges 361,81 &euro; pour 1 080,78 &euro; de recettes.</li>
+                    <li><strong>Temps forts 2024</strong>&nbsp;: visite du producteur de poulets avec repas sur
+                        place et visite du producteur de pommes le 12 juin, auberge espagnole au Café d'Abord avec
+                        le groupe Tab'asco le 4 juillet.</li>
+                    <li><strong>Conseil collégial</strong> renouvelé par moitié, six nouveaux membres élus par 20
+                        voix pour.</li>
+                </ul>
+            </div>
+
+            <div class="card mt-20">
+                <h3>&#128200; L'AMAP au fil des ans</h3>
+                <p>Nombre de familles adhérentes, tel que présenté en assemblée générale.</p>
+                <ul class="article-list">
+                    <li><strong>2025</strong> &mdash; 48 familles</li>
+                    <li><strong>2024</strong> &mdash; 53 familles</li>
+                    <li><strong>2023</strong> &mdash; 57 familles</li>
+                    <li><strong>2022</strong> &mdash; 58 familles</li>
+                    <li><strong>2021</strong> &mdash; 53 familles</li>
+                </ul>
+            </div>
+
+            <p class="source-note">
+                Les procès-verbaux complets sont consultables auprès du conseil collégial&nbsp;: ils nomment
+                l'ensemble des membres et ne sont donc pas publiés en ligne. Les assemblées antérieures à 2024
+                n'ont pas de compte-rendu archivé, seulement des tableaux de chiffres.
+            </p>
         </div>
     </section>
 
@@ -260,34 +440,91 @@
         <div class="container">
             <div class="section-title">
                 <h2>Le Collège</h2>
-                <p>Les bénévoles qui font vivre l'AMAP au quotidien.</p>
+                <p>Les douze bénévoles élus à l'assemblée générale du 27 novembre 2025 pour administrer l'AMAP
+                    en 2026.</p>
             </div>
+            <h3 style="text-align: center; margin-bottom: 20px;">Le bureau</h3>
             <div class="trombi-grid">
                 <div class="trombi-card">
                     <div class="trombi-photo">&#128100;</div>
-                    <h4>Référent légumes</h4>
-                    <p class="doc-meta">(nom à renseigner)</p>
+                    <h4>Laurent P.</h4>
+                    <span class="trombi-role">Président</span>
                 </div>
                 <div class="trombi-card">
                     <div class="trombi-photo">&#128100;</div>
-                    <h4>Trésorier</h4>
-                    <p class="doc-meta">(nom à renseigner)</p>
+                    <h4>Thierry B.</h4>
+                    <span class="trombi-role">Trésorier</span>
                 </div>
                 <div class="trombi-card">
                     <div class="trombi-photo">&#128100;</div>
-                    <h4>Secrétaire</h4>
-                    <p class="doc-meta">(nom à renseigner)</p>
-                </div>
-                <div class="trombi-card">
-                    <div class="trombi-photo">&#128100;</div>
-                    <h4>Référent communication</h4>
-                    <p class="doc-meta">(nom à renseigner)</p>
+                    <h4>Delphine L.</h4>
+                    <span class="trombi-role">Secrétaire</span>
                 </div>
             </div>
-            <p class="placeholder-note mt-20">
-                Les photos et noms des membres du collège seront complétés après validation et accord écrit des
-                intéressés (droit à l'image).
-            </p>
+
+            <h3 style="text-align: center; margin: 40px 0 20px;">Les autres membres du conseil collégial</h3>
+            <div class="trombi-grid">
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Clémentine B.</h4>
+                    <span class="trombi-role">Depuis 2018</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Anouk C.</h4>
+                    <span class="trombi-role">Depuis 2020</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Charlène C.</h4>
+                    <span class="trombi-role">Depuis 2020</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Laurence B.</h4>
+                    <span class="trombi-role">Depuis 2022</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Héléna B.</h4>
+                    <span class="trombi-role">Depuis 2024</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Aline C.</h4>
+                    <span class="trombi-role">Depuis 2025</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Emmanuelle M.</h4>
+                    <span class="trombi-role">Depuis 2025</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Patrick W.</h4>
+                    <span class="trombi-role">Depuis 2025</span>
+                </div>
+                <div class="trombi-card">
+                    <div class="trombi-photo">&#128100;</div>
+                    <h4>Denis-Pierre M.</h4>
+                    <span class="trombi-role">Depuis 2025</span>
+                </div>
+            </div>
+
+            <div class="card mt-20">
+                <h3>&#129530; Les coordinateurs de contrats</h3>
+                <p>Chaque contrat a son coordinateur&nbsp;: c'est un adhérent qui veut participer à la vie de
+                    l'AMAP et qui fait le lien avec le producteur. Il récupère les informations du producteur
+                    (produits, prix, conditionnement, livraisons), met en place le contrat sur AMAPJ, collecte
+                    contrats et chèques, transmet les règlements au producteur à chaque période et relaie les aléas
+                    de distribution. En prime&nbsp;: organiser une visite chez le producteur et présenter le bilan
+                    de son contrat en assemblée générale.</p>
+                <p>Dix-sept contrats sont coordonnés en 2026&nbsp;: légumes, pain, œufs, fromages de chèvre,
+                    poulet, bœuf, agneau, poisson, pommes, kiwis, noix, châtaignes, champignons, miel, vin,
+                    tisanes et savon.</p>
+                <p class="doc-meta">Pour joindre un coordinateur, passez par la page
+                    <a href="contact.html">Contact</a> ou demandez lors d'une distribution.</p>
+            </div>
         </div>
     </section>
 
@@ -295,11 +532,13 @@
     <section class="section" id="galerie">
         <div class="container">
             <div class="section-title">
-                <h2>Galerie</h2>
-                <p>Retour en images sur les temps forts de l'AMAP : AG, visites de fermes, fêtes, ateliers.</p>
+                <h2>La vie de l'AMAP</h2>
+                <p>Les temps forts de l'association : assemblée générale, visites de fermes, distributions
+                    festives et dégustations.</p>
             </div>
             <h3 style="text-align: center; margin-bottom: 10px;">Frise annuelle</h3>
-            <p style="text-align: center; color: #6b7280; margin-bottom: 10px;">Les temps forts d'une année à l'AMAP des Jalles.</p>
+            <p style="text-align: center; color: var(--mute); margin-bottom: 10px;">Le rythme d'une année à
+                l'AMAP des Jalles, tel qu'il s'est installé au fil des saisons.</p>
             <div class="timeline-wrap">
                 <div class="timeline" id="timeline"></div>
             </div>
@@ -310,18 +549,33 @@
     <section class="section section-light">
         <div class="container">
             <div class="section-title">
-                <h2>Événements 2025-2026</h2>
-                <p>Les moments marquants de l'année. Cliquez sur une vignette pour l'agrandir.</p>
+                <h2>Les temps forts 2025</h2>
+                <p>Tels que présentés en assemblée générale le 27 novembre 2025.</p>
             </div>
             <div id="eventsContainer"></div>
+
+            <div class="card mt-20">
+                <h3>&#128197; Au programme en 2026</h3>
+                <p>Les orientations votées à l'assemblée générale du 27 novembre 2025.</p>
+                <ul class="article-list">
+                    <li><strong>&#129383; On continue les rendez-vous festifs</strong> &mdash; galette de
+                        janvier, distributions festives et dégustations tout au long de l'année.</li>
+                    <li><strong>&#128668; Visites de producteurs</strong> &mdash; et une mise à l'honneur
+                        d'un producteur chaque mois pendant la distribution.</li>
+                    <li><strong>&#127818; Nouveaux contrats</strong> &mdash; sondage auprès des adhérents et
+                        finalisation du contrat agrumes.</li>
+                    <li><strong>&#127881; Soirée annuelle avec l'ASCO</strong> &mdash; et une soirée
+                        inter-AMAP en mars, organisée par Amaplanète Blanquefort.</li>
+                    <li><strong>&#129387; Projet conserverie</strong> &mdash; en préparation avec l'ASCO.</li>
+                    <li><strong>&#127969; Nouvelles distributions</strong> &mdash; distribution enfants et
+                        « Jardin secret » au printemps, distribution au Jardin de Quentin, distribution de
+                        Pâques.</li>
+                    <li><strong>&#129309; Recrutement de nouvelles familles</strong> &mdash; via le site de la
+                        Ville et le journal municipal.</li>
+                </ul>
+            </div>
         </div>
     </section>
-
-    <!-- Lightbox galerie -->
-    <dialog class="lightbox" id="lightbox">
-        <button class="close" aria-label="Fermer" onclick="document.getElementById('lightbox').close()">&times;</button>
-        <img id="lightboxImg" alt="">
-    </dialog>
 
     <!-- Liens Amis -->
     <section class="section" id="liens-amis">
@@ -339,7 +593,14 @@
                 <div class="card">
                     <h3>&#127817; AMAP Aquitaine</h3>
                     <p>Réseau régional des AMAP de Nouvelle-Aquitaine.</p>
-                    <a href="https://amap-aquitaine.org/" target="_blank" rel="noopener" class="btn btn-secondary">Visiter &#8599;</a>
+                    <a href="https://www.amap-aquitaine.org/" target="_blank" rel="noopener" class="btn btn-secondary">Visiter &#8599;</a>
+                </div>
+                <div class="card">
+                    <h3>&#127881; ASCO</h3>
+                    <p>L'Association Sportive et Culturelle d'Ouest Saint-Médard, qui nous accueille pour la
+                        soirée annuelle de l'AMAP et avec qui se prépare le projet de conserverie.</p>
+                    <a href="https://association-asco.com/" target="_blank" rel="noopener"
+                        class="btn btn-secondary">Visiter &#8599;</a>
                 </div>
                 <div class="card">
                     <h3>&#127995; Annuaire Agence Bio</h3>
@@ -348,8 +609,40 @@
                 </div>
                 <div class="card">
                     <h3>&#128205; AMAPs voisines</h3>
-                    <p>Liste des AMAPs voisines (Eysines, Le Taillan, Mérignac, Saint-Aubin&hellip;) à déposer.</p>
-                    <p class="doc-meta">(à compléter)</p>
+                    <p>Les AMAP les plus proches, si nos contrats sont complets ou si un autre jour vous arrange
+                        mieux.</p>
+                    <ul class="doc-list">
+                        <li>
+                            <span>Le Panier des Tourterelles &mdash; Saint-Aubin-de-Médoc<br>
+                                <span class="doc-meta">Jeudi 19h00-19h30</span></span>
+                            <span><a href="http://panier.tourterelles.free.fr/amap/" target="_blank"
+                                    rel="noopener" class="btn btn-secondary">Voir &#8599;</a></span>
+                        </li>
+                        <li>
+                            <span>AMAP Taillanaise &mdash; Le Taillan-Médoc<br>
+                                <span class="doc-meta">Mardi 18h15-19h15</span></span>
+                            <span><a href="http://amaptaillanaise.blogspot.com/" target="_blank" rel="noopener"
+                                    class="btn btn-secondary">Voir &#8599;</a></span>
+                        </li>
+                        <li>
+                            <span>Amaplanète Blanquefort &mdash; Blanquefort<br>
+                                <span class="doc-meta">Jeudi 18h45-19h45</span></span>
+                            <span><a href="http://www.amaplaneteblanquefort.fr/wordpress/" target="_blank"
+                                    rel="noopener" class="btn btn-secondary">Voir &#8599;</a></span>
+                        </li>
+                        <li>
+                            <span>Martign'AMAP &mdash; Martignas-sur-Jalle<br>
+                                <span class="doc-meta">Mardi 19h00-20h00</span></span>
+                            <span><a href="https://camap.amap44.org/group/2679" target="_blank" rel="noopener"
+                                    class="btn btn-secondary">Voir &#8599;</a></span>
+                        </li>
+                        <li>
+                            <span>AMAP Papille Eysines &mdash; Eysines<br>
+                                <span class="doc-meta">Mercredi 18h30-19h30</span></span>
+                            <span><a href="http://www.amapapilleysines.org" target="_blank" rel="noopener"
+                                    class="btn btn-secondary">Voir &#8599;</a></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -381,7 +674,7 @@
         </div>
         <div class="footer-bottom">
             <p>2024-2026 AMAP des Jalles</p>
-            <p class="footer-version">Dernière mise à jour : 4 juin 2026</p>
+            <p class="footer-version">Dernière mise à jour : 18 août 2026</p>
         </div>
     </footer>
 
@@ -390,46 +683,81 @@
             document.getElementById('mainNav').classList.toggle('open');
         }
 
-        // === Galerie : frise annuelle et événements ===
-        // À enrichir au fil des années — déposer les photos dans images/galerie/<annee>/<event>/.
+        // === Frise annuelle et temps forts ===
+        // Source : diaporama et procès-verbal de l'AG du 27/11/2025.
         const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
         const yearlyEvents = {
-            1: { title: 'AG annuelle', emoji: '&#128483;' },
-            3: { title: 'Visite ferme légumes', emoji: '&#129388;' },
-            5: { title: 'Fête de printemps', emoji: '&#127801;' },
-            7: { title: 'Barbecue d\'été', emoji: '&#127869;' },
-            10: { title: 'Marché d\'automne', emoji: '&#127825;' },
-            12: { title: 'Marché de Noël', emoji: '&#127876;' }
+            1: { title: 'Galette', emoji: '&#129383;' },
+            2: { title: 'Crêpes', emoji: '&#129374;' },
+            3: { title: 'Dégustation tisanes', emoji: '&#127807;' },
+            4: { title: 'Distribution de Pâques', emoji: '&#129370;' },
+            5: { title: 'Visite de ferme', emoji: '&#128668;' },
+            6: { title: 'Soirée de l\'AMAP', emoji: '&#127881;' },
+            9: { title: 'Forum des associations', emoji: '&#129309;' },
+            11: { title: 'Distribution festive', emoji: '&#127858;' },
+            12: { title: 'Assemblée générale', emoji: '&#128499;' }
         };
 
         const events = [
             {
-                title: 'AG annuelle',
-                date: 'Janvier 2026',
-                emoji: '&#128483;',
-                photos: [
-                    { src: 'images/galerie/2026/ag/photo1.jpg', caption: 'Ouverture' },
-                    { src: 'images/galerie/2026/ag/photo2.jpg', caption: 'Bilan' },
-                    { src: 'images/galerie/2026/ag/photo3.jpg', caption: 'Vote' }
-                ]
+                title: 'Assemblée générale',
+                date: '27 novembre 2025',
+                emoji: '&#128499;',
+                desc: '21 familles sur 48 présentes. Rapports d\'activités et financier approuvés à l\'unanimité, cotisation maintenue à 8 €, renouvellement du conseil collégial et vote pour le retour du pain à la coupe.'
             },
             {
-                title: 'Visite ferme Le Jardin de Quentin',
-                date: 'Mars 2026',
-                emoji: '&#129388;',
-                photos: [
-                    { src: 'images/galerie/2026/visite-quentin/photo1.jpg', caption: 'Serre' },
-                    { src: 'images/galerie/2026/visite-quentin/photo2.jpg', caption: 'Champs' }
-                ]
+                title: 'Visite de la champignonnière',
+                date: 'Novembre 2025',
+                emoji: '&#127812;',
+                desc: 'Découverte de l\'un de nos nouveaux producteurs. Merci à Laurent D., Pierre et Denis-Pierre.'
             },
             {
-                title: 'Marché de Noël 2025',
-                date: 'Décembre 2025',
-                emoji: '&#127876;',
-                photos: [
-                    { src: 'images/galerie/2025/noel/photo1.jpg', caption: 'Stand' },
-                    { src: 'images/galerie/2025/noel/photo2.jpg', caption: 'Vin chaud' }
-                ]
+                title: 'Distribution d\'Halloween',
+                date: '6 novembre 2025',
+                emoji: '&#127875;',
+                desc: 'Soupe et citrouille sculptée pendant la distribution. Merci à Delphine.'
+            },
+            {
+                title: 'Soirée annuelle avec l\'ASCO',
+                date: '19 juin 2025',
+                emoji: '&#127881;',
+                desc: 'Le grand rendez-vous convivial de l\'année, ouvert aux nouveaux adhérents, organisé avec l\'ASCO.'
+            },
+            {
+                title: 'Visite du fournil « La Collective »',
+                date: 'Mai 2025',
+                emoji: '&#129366;',
+                desc: 'Visite du fournil, repas et balade. Merci à La Collective.'
+            },
+            {
+                title: 'Dégustation pain, vin et fromage de chèvre',
+                date: 'Mai 2025',
+                emoji: '&#129472;',
+                desc: 'Trois de nos contrats réunis le temps d\'une distribution. Merci aux coordinateurs.'
+            },
+            {
+                title: 'Dégustation de tisanes',
+                date: 'Mars 2025',
+                emoji: '&#127807;',
+                desc: 'Présentation des mélanges du contrat tisanes bio. Merci à Héléna.'
+            },
+            {
+                title: 'Crêpes de la Chandeleur',
+                date: 'Février 2025',
+                emoji: '&#129374;',
+                desc: 'Crêpes pour tout le monde pendant la distribution. Merci à Héléna.'
+            },
+            {
+                title: 'Galette des rois',
+                date: '30 janvier 2025',
+                emoji: '&#129383;',
+                desc: 'La galette d\'ouverture de l\'année, préparée par La Collective.'
+            },
+            {
+                title: 'Nouveaux contrats',
+                date: 'Toute l\'année 2025',
+                emoji: '&#128203;',
+                desc: 'Sondage auprès des adhérents sur les champignons, les conserves de poisson, les avocats et agrumes et les huîtres — et l\'arrivée de nos nouveaux producteurs champignons, fruits et agrumes.'
             }
         ];
 
@@ -449,34 +777,12 @@
 
         function renderEvents() {
             const container = document.getElementById('eventsContainer');
-            container.innerHTML = events.map(ev => `
+            container.innerHTML = `<div class="card">${events.map(ev => `
                 <div class="event-block">
                     <h3>${ev.emoji} ${ev.title} <span class="event-date">&middot; ${ev.date}</span></h3>
-                    <div class="gallery-grid">
-                        ${ev.photos.map(p => {
-                            // Affiche un placeholder tant que la photo n'est pas déposée.
-                            // Quand p.uploaded === true, on tente de charger l'image réelle.
-                            if (p.uploaded) {
-                                return `<div class="gallery-item" onclick="openLightbox('${p.src}', '${ev.title} &mdash; ${p.caption}')">
-                                    <img src="${p.src}" alt="${p.caption}">
-                                    <div class="gallery-caption">${p.caption}</div>
-                                </div>`;
-                            }
-                            return `<div class="gallery-item" title="${p.caption} (photo à déposer)">
-                                <span>${ev.emoji}</span>
-                                <div class="gallery-caption">${p.caption} <em style="opacity:0.7;">(à venir)</em></div>
-                            </div>`;
-                        }).join('')}
-                    </div>
+                    <p>${ev.desc}</p>
                 </div>
-            `).join('');
-        }
-
-        function openLightbox(src, caption) {
-            const img = document.getElementById('lightboxImg');
-            img.src = src;
-            img.alt = caption;
-            document.getElementById('lightbox').showModal();
+            `).join('')}</div>`;
         }
 
         document.addEventListener('DOMContentLoaded', function () {
