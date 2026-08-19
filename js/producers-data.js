@@ -80,11 +80,11 @@ const producers = [
         contractYear: 2026,
         archived: false,
         bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/66236/la-collective', cert: 'sarl la collective' },
-        coords: { lat: 44.8194, lng: -0.4906 },
-        address: 'Fournil partagé',
-        city: 'Latresne (déménagement Bègles en 2026)',
-        distanceKm: 25,
-        description: 'Pains au levain naturel, farines bio de petites minoteries locales (Dordogne, Lot-et-Garonne).',
+        coords: { lat: 44.81633, lng: -0.54864 },
+        address: '112 avenue Alexis Capelle',
+        city: 'Bègles',
+        distanceKm: 21,
+        description: 'Boulangerie artisanale, biologique et coopérative sous forme de SCOP. Après deux belles années à Latresne, La Collective s\'est installée à Bègles. Les boulanger·e·s produisent des pains 100 % levain naturel, ainsi que des brioches et des biscuits, tous certifiés bio. Une grande partie de leurs farines est issue de l\'agriculture paysanne.',
         products: [
             { name: 'Blé T80', active: true },
             { name: 'Blé T65', active: true },
@@ -100,7 +100,8 @@ const producers = [
         farmer: 'Marlène Serrano',
         category: 'produits-laitiers',
         emoji: '🧀',
-        active: true,
+        // Retiré de l'affichage le 19/08/2026 (retour CC) : ne fournit plus l'AMAP.
+        active: false,
         contractYear: 2026,
         archived: false,
         // Pas de "cert" : opérateur introuvable dans TRACES NT (06/2026) — on garde la fiche Agence Bio.
@@ -149,7 +150,8 @@ const producers = [
         farmer: 'Laurent Labegurie',
         category: 'viande',
         emoji: '🥩',
-        active: true,
+        // Retiré de l'affichage le 19/08/2026 (retour CC) : contrat bœuf arrêté.
+        active: false,
         contractYear: 2026,
         archived: false,
         bio: { certified: true, label: 'AB', sourceUrl: 'https://annuaire.agencebio.org/operateur/141717/labegurie-laurent-michel', cert: 'labegurie laurent' },
