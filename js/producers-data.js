@@ -73,7 +73,7 @@ const producers = [
     {
         id: 'pain',
         name: 'La Collective',
-        farmer: 'Anne, Mathilde et Brice',
+        farmer: 'Anne et Brice',
         category: 'pain',
         emoji: '🥖',
         active: true,
